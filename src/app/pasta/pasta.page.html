@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Page of our Pastas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment [(ngModel)]="jenistampilan" >
+    <ion-segment-button value="accordion">
+      <ion-label>Accordion</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="card">
+      <ion-label>Card</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="grid">
+      <ion-label>Grid</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+<ion-accordion-group expand="inset" *ngIf="jenistampilan === 'accordion'">
+  <ion-accordion *ngFor="let pasta of pastas">
+    <ion-item slot="header" color="primary">
+      <ion-label>{{ pasta.name }}</ion-label>
+    </ion-item>
+    <div class="ion-padding" slot="content">
+      <ion-item>
+        <img [src] = "pasta.url">
+      </ion-item>
+      <ion-item> {{ pasta.description }} </ion-item> 
+      <ion-item> Price : Rp. {{ pasta.price }}</ion-item>
+      <ion-item>
+        <ion-label>Spicy?</ion-label>
+        <ion-badge color="danger" *ngIf="pasta.spicy">YESSSS</ion-badge>
+        <ion-badge color="success" *ngIf="pasta.spicy === false">NOOOOO</ion-badge>
+      </ion-item>
+    </div>
+  </ion-accordion>
+</ion-accordion-group>
+
+<div *ngIf="jenistampilan === 'card'">
+  <ion-card *ngFor="let pasta of pastas">
+    <img [alt]="pasta.name" [src]="pasta.url" />
+    <ion-card-header>
+      <ion-card-title>{{ pasta.name }}</ion-card-title>
+      <ion-card-subtitle>Rp. {{ pasta.price }}</ion-card-subtitle>
+      <ion-chip *ngIf="pasta.spicy">
+        <ion-icon name="alert" color="danger"></ion-icon>
+        <ion-label>SPICY</ion-label>
+      </ion-chip>
+    </ion-card-header>
+    <ion-card-content>
+      {{ pasta.description }}
+    </ion-card-content>
+  </ion-card>
+</div>
+
+<ion-grid *ngIf="jenistampilan=='grid'">
+   <ion-row *ngFor="let pastas2 of chunkArray(pastas, 2); let i = index" >
+  	<ion-col *ngFor="let pasta of pastas2; let i2 = index" >
+     	<ion-list>
+        	<ion-item>
+           	<ion-img [src]="pasta.url"></ion-img>
+        	</ion-item>
+        	<ion-item routerLink="/pastadetail/{{(i*2)+i2}}">
+            	{{pasta.name}}
+        	</ion-item>
+          <ion-item>
+            <ion-chip *ngIf="pasta.spicy">
+              <ion-icon name="alert" color="danger"></ion-icon>
+              <ion-label>SPICY</ion-label>
+            </ion-chip>
+          </ion-item>
+     	</ion-list>
+ 	</ion-col>
+   </ion-row>
+</ion-grid>
+
+
+
+</ion-content>

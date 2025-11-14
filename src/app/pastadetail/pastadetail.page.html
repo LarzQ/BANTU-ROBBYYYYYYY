@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Pasta Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-card>
+    <ion-img [src]="pasta?.url"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{ pasta?.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ pasta?.description }}</p>
+      <p><strong>Price:</strong> Rp {{ pasta?.price }}</p>
+
+      <ion-label>Pasta Recipe Instruction:</ion-label>
+      <ol>
+        <li *ngFor="let ins of pasta.instructions">{{ins.instruction}}</li>
+      </ol>
+      <ion-card class="ion-padding">
+        <ion-card-header>
+          <ion-card-title>Add new Instruction</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Step No.</ion-label>
+            <ion-input type="number" [(ngModel)]="newStep"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Instruction</ion-label>
+            <ion-textarea [(ngModel)]="newInstruction"></ion-textarea>
+          </ion-item>
+
+          <ion-button expand="block" color="warning" (click)="addInstruction(pasta.id)"
+            >ADD</ion-button
+          >
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

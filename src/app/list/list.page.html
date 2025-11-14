@@ -1,0 +1,130 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="danger" mode="md">
+    <ion-title>list</ion-title>
+    <ion-buttons slot="end">
+      <ion-button size="small" fill="solid" color="primary" (click)="goYesterday()" [disabled]="is5daysago">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button size="small" fill="solid" color="primary" (click)="goToday()">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-button>
+      <ion-button size="small" fill="solid" color="primary" (click)="goTomorrow()" [disabled]="is5dayslater">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list lines="full">
+    <ion-item>
+      <ion-text>
+        Product List per {{today_ind()}}
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-list lines="full">
+    <ion-item>
+      <ion-text>
+        Product Name : <b>{{product.productName}}</b>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-list lines="full">
+    <ion-item>
+      <ion-text>
+        Product Price : <b>Rp {{product.productPrice}}</b>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-list lines="full">
+    <ion-item>
+      <ion-text>
+        Quantity :
+        <ion-button size="small" (click)="reduceQuantity()" [disabled]="isMinimum">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <b>{{product.productQuantity}}</b>
+      </ion-text>
+      <ion-button size="small" (click)="addQuantity()" [disabled]="isMaximum">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list lines="full">
+    <ion-item>
+      <ion-text>
+        Total Amount : <b>Rp {{total()}}</b>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Masukkan kode : " [(ngModel)]="couponcode" (keyup)="checkValid()">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-text [ngStyle]="{'color': textcolor}">
+        Coupon code {{couponcode}} is {{strvalid}} you get {{discount}}% discount
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-img *ngIf="strvalid=='valid'"
+        src="https://www.animatedimages.org/data/media/1103/animated-congratulation-image-0092.gif">
+      </ion-img>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngFor="let book of books" lines="full" inset="true">
+    <ion-list-header>
+      <ion-label>
+        <h1>{{book.title}}</h1>
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Author : {{book.author}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Discount : {{book.discount}}%</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <span style="text-decoration: line-through;">
+          Price: ${{book.price}}
+        </span>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label *ngIf="discount == 0">
+        Price: ${{getDiscountedPrice(book) | number:'1.2-2'}}
+      </ion-label>
+      <ion-label *ngIf="discount > 0">
+        <span style="text-decoration: line-through;">
+          Price: ${{getDiscountedPrice(book) | number:'1.2-2'}}
+        </span>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="discount > 0">
+      <ion-label>
+        Price after coupon: ${{getFinalPrice(book) | number:'1.2-2'}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">list</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>

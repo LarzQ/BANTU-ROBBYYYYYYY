@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>editpasta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">editpasta</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-input [(ngModel)]="e_name" label="Name" labelPlacement="floating" />
+    </ion-item>
+    <ion-item>
+      <ion-textarea [(ngModel)]="e_desc" label="Description" labelPlacement="floating" />
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="e_price" label="Price" labelPlacement="floating" />
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="e_url" label="URL" labelPlacement="floating" />
+    </ion-item>
+    <ion-item>
+      <ion-img [src]="e_url" />
+    </ion-item>
+  </ion-list>
+
+  <ion-button (click)="updatepasta()">Update</ion-button>
+</ion-content>

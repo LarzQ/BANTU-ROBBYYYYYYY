@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>setting</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Masukkan url : " [(ngModel)]="url">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <img *ngIf="url" [src]="url" alt="Preview" style="max-width:100%; height:auto;" />
+    </ion-item>
+  </ion-list>
+
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Masukkan Password : " [(ngModel)]="password" (keyup)="cekPassword()">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox [checked]="kriteria1" labelPlacement="end">
+        More than 6 characters
+      </ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox [checked]="kriteria2" labelPlacement="end">
+        Include Number
+      </ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox [checked]="kriteria3" labelPlacement="end">
+        Include Special Character (!@#$%^&*)
+      </ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
