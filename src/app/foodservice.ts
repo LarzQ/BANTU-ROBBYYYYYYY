@@ -77,11 +77,11 @@ export class Foodservice {
     const body = new URLSearchParams();
     body.set('name', p_name);
     body.set('url', p_url);
-    body.set('description', p_description);
+    body.set('desc', p_description);
     body.set('price', p_price.toString());
     const urlEncodedData = body.toString();
     return this.http.post(
-      'https://ubaya.cloud/hybrid/160423088/new_pasta.php',
+      "https://ubaya.cloud/hybrid/160423088/new_pasta.php",
       urlEncodedData,
       { headers }
     );
@@ -100,7 +100,7 @@ export class Foodservice {
     const body = new URLSearchParams();
     body.set('id', p_id.toString());
     body.set('name', p_name);
-    body.set('description', p_description);
+    body.set('desc', p_description);
     body.set('url', p_url);
     body.set('price', p_price.toString());
     const urlEncodedData = body.toString();
