@@ -77,7 +77,7 @@ export class Foodservice {
     const body = new URLSearchParams();
     body.set('name', p_name);
     body.set('url', p_url);
-    body.set('desc', p_description);
+    body.set('description', p_description);
     body.set('price', p_price.toString());
     const urlEncodedData = body.toString();
     return this.http.post(
@@ -100,7 +100,7 @@ export class Foodservice {
     const body = new URLSearchParams();
     body.set('id', p_id.toString());
     body.set('name', p_name);
-    body.set('desc', p_description);
+    body.set('description', p_description);
     body.set('url', p_url);
     body.set('price', p_price.toString());
     const urlEncodedData = body.toString();
